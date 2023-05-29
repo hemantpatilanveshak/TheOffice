@@ -44,6 +44,6 @@ def addEmployee(request):
 
 
 
-def delEmployee(request):
+def delEmployee(request,id):
     if request.method == 'POST':
-        pass
+        emp = Employee.objects.get(id=id)
