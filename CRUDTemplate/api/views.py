@@ -1,7 +1,7 @@
 from django.shortcuts import render , redirect
 from .models import Employee
 from django.http import HttpResponse ,HttpResponseRedirect
-from .forms import addEmployeeForm
+from .forms import EmployeeRegistration
 
 
 # Create your views here.
@@ -30,13 +30,20 @@ def addEmployee(request):
         #     phone = phone
         # )
 
-        form = addEmployeeForm(request.POST)
+        form = EmployeeRegistration(request.POST)
 
 
         # emp.save()
         # return render('api/index.html')
         if form.is_valid():
+            form.save()
             return HttpResponseRedirect('/apiview/')
-        
+    return render(request,template_name='api/index.html')
     # else:
     #     form = addEmployeeForm()
+
+
+
+def delEmployee(request):
+    if request.method == 'POST':
+        pass
