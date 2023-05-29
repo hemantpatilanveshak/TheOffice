@@ -7,6 +7,7 @@ class OnlySrudentSerialzer(serializers.ModelSerializer):
     class Meta:
         model = Student
         fields = ['id','name','roll','city','school']
+        # read_only_fields = []
 
         
 

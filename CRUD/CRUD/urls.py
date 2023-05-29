@@ -22,4 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('stu/',views.get_student_data),
     path('stu/<int:id>',views.studentapi),
+    path('schoolapi/',views.school_api),
+    path('schoolapi/<int:id>',views.school_api),
 ]

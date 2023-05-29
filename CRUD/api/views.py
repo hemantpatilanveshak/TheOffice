@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import Student , School
+from rest_framework import status
 from .serializers import StudentListSerializer , SchoolListSerializer , OnlySrudentSerialzer
 from rest_framework.response import Response 
 from rest_framework.decorators import api_view 
@@ -70,3 +71,37 @@ def studentapi(request, id = None):
 
         return Response({"msg":"Data Deleted"})
     
+
+@api_view(['GET','POST'])
+def school_api(request,id =None):
+    if request.method == 'GET':
+        if id is not None:
+            try:
+                obj = School.objects.get(id = id)
+            except:
+                return Response({"msg":"Game Id Does not exists"})
+            serializer = SchoolListSerializer(obj)
+            data = serializer.data
+            return Response({"msg":"Data Fetched By ID","data":data})
+    
+    
+        else:
+            obj = School.objects.all()
+            serializer = SchoolListSerializer(obj,many = True)
+            data = serializer.data
+            return Response({"msg":"Data Fetched","Data":data})
+            
+    # return Response({"msg":"Error","status":status.HTTP_400_BAD_REQUEST})
+
+
+    if request.method == 'POST':
+        obj = request.data
+        serializer = SchoolListSerializer(data=obj)
+
+        if serializer.is_valid():
+            serializer.save()
+
+        return Response({"msg":"Data posted","data":serializer.data})
+
+
+
