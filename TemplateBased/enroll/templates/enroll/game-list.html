@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card-body">
+    <h4>Game List</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Game Name</th>
+                <th scope="col">Ratings</th>
+                <th scope="col">Year Of Release</th>
+                <th scope="col">Price</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for game in games %}
+            <tr>
+                <td>{{ games.Game_Name }}</td>
+                <td>{{ games.Year_Of_Release  }}</td>
+                <td>{{  }}</td>
+                <td>{{  }}</td>
+                <td><a type="button" class="btn btn-warning" href="">Update</a>
+                    <a type="button" class="btn btn-danger" href="">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a type="button" class="btn btn-success" href="{%url 'book-create' %}">Create</a>
+</div>
+{% endblock %}

@@ -44,6 +44,14 @@ def addEmployee(request):
 
 
 
+def edit(request):
+    emp = Employee.objects.all()
+    context = {
+        'emp':emp
+    }
+    return render(request,'api/index.html',context)
+
+
 def delEmployee(request,id):
     if request.method == 'POST':
         emp = Employee.objects.get(id=id)

@@ -1,5 +1,5 @@
 """
-URL configuration for TemplateBased project.
+URL configuration for Books project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.2/topics/http/urls/
@@ -16,9 +16,38 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from enroll import views
+from myapp import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('game-list/', views.getGames, name='book-list'),
+    path('book-list', views.bookList, name='book-list'),
+    path('book-create', views.bookCreate, name='book-create'),
+    path('book-update/<int:id>', views.bookUpdate, name='book-update'),
+    path('book-delete/<int:id>', views.bookDelete, name='book-delete'),
+    
 ]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
