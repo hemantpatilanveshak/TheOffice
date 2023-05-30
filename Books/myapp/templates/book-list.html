@@ -9,7 +9,8 @@
                 <th scope="col">Description</th>
                 <th scope="col">Author</th>
                 <th scope="col">Year</th>
-                <th scope="col">Action</th>
+                <th scope="col">Picture</th>
+
             </tr>
         </thead>
         <tbody>
@@ -19,6 +20,11 @@
                 <td>{{ book.description }}</td>
                 <td>{{ book.author }}</td>
                 <td>{{ book.year }}</td>
+                <td>
+                    {% if book.picture %}
+                    <img src="{{book.picture.url}}" alt="" height="70" width="90">
+                    {% endif %}
+                </td>
                 <td><a type="button" class="btn btn-warning" href="/book-update/{{ book.id }}">Update</a>
                     <a type="button" class="btn btn-danger" href="/book-delete/{{ book.id }}">Delete</a>
                 </td>

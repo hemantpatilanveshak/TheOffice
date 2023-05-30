@@ -6,3 +6,4 @@ class Book(models.Model):
     description = models.TextField(max_length=1000, blank=False)
     author = models.CharField(max_length=100, blank=False)
     year = models.IntegerField(blank=False, default=2000)
+    picture = models.ImageField(max_length=255,upload_to='pictures/',null=True , blank= True)
