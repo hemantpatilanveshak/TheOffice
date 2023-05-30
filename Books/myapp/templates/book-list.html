@@ -10,6 +10,7 @@
                 <th scope="col">Author</th>
                 <th scope="col">Year</th>
                 <th scope="col">Picture</th>
+                <th scope="col">pdf</th>
 
             </tr>
         </thead>
@@ -23,6 +24,11 @@
                 <td>
                     {% if book.picture %}
                     <img src="{{book.picture.url}}" alt="" height="70" width="90">
+                    {% endif %}
+                </td>
+                <td>
+                    {% if book.pdf %}
+                    <a href="{{book.pdf.url}}">Tap Here To View</a>
                     {% endif %}
                 </td>
                 <td><a type="button" class="btn btn-warning" href="/book-update/{{ book.id }}">Update</a>

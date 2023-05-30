@@ -12,14 +12,20 @@ class BookListSerailizer(serializers.ModelSerializer):
     
     class Meta:
         model = Book
-        fields = ['id','title','description','author','year','picture']
+        fields = ['id','title','description','author','year','picture','pdf']
 
 
-     #This is the magic function which does the work
     def get_photo_url(self, obj):
         request = self.context.get('request')
         photo_url = obj.picture.url
         return request.build_absolute_uri(photo_url)
+    
+    def get_pdf_url(self,obj):
+        request = self.context.get('request')
+        pdf_url = obj.pdf.url
+        return request.build_absolute_uri(pdf_url)
+    
+
 
     # def get_image_url(self, obj):
     #     return obj.picture.url
