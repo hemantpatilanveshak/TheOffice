@@ -1,5 +1,19 @@
 {% extends "base.html" %}
 {% block content %}
+<div class="container mt-5">
+    <form method="get">
+    <div class="mx-auto text-center d-flex ">
+        <input class="form-control" name="book" placeholder="Search" style="width:400px">
+        <!-- <button class="btn btn-primary">Search</button> -->
+        <a type="button" class="btn btn-primary" href="/book-filter/">Search</a>
+    </div>
+</form>
+
+</div>
+
+
+
+
 <div class="card-body">
     <h4>Book List</h4>
     <table class="table">

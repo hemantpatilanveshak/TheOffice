@@ -2,11 +2,39 @@ from django.shortcuts import render, redirect
 from .models import Book
 from .forms import BookForm
 from .serializers import BookListSerailizer
+from django.conf import settings
+from django.core.cache.backends.base import DEFAULT_TIMEOUT
+from django.views.decorators.cache import cache_page
+from django.core import cache
+
+CACHE_TTL = getattr(settings,'CACHE_TTL',DEFAULT_TIMEOUT)
+
+
 
 # Create your views here.
 def bookList(request):  
     books = Book.objects.all()  
-    return render(request,"book-list.html",{'books':books})  
+    return render(request,"book-list.html",{'books':books})
+
+def getBook(book_name = None):
+    if book_name:
+        books = Book.objects.filter(title__contains = book_name)
+    else:
+        books = Book.objects.all()
+
+    return books
+
+def home(request):
+    book_name = request.GET.get('title')
+    
+    if book_name:
+        book = getBook(book_name) 
+    else:
+        book = getBook()
+
+    context = {'book':book}
+    return render(request,"book-filter.html",context)
+
 
 # def getList(request):
 #     obj = 
