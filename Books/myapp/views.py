@@ -6,6 +6,8 @@ from django.conf import settings
 from django.core.cache.backends.base import DEFAULT_TIMEOUT
 from django.views.decorators.cache import cache_page
 from django.core import cache
+from . tasks import generate_pdf
+
 
 CACHE_TTL = getattr(settings,'CACHE_TTL',DEFAULT_TIMEOUT)
 
@@ -16,24 +18,21 @@ def bookList(request):
     books = Book.objects.all()  
     return render(request,"book-list.html",{'books':books})
 
-def getBook(book_name = None):
-    if book_name:
-        books = Book.objects.filter(title__contains = book_name)
-    else:
-        books = Book.objects.all()
+# def getBook(book_name = None):
+#     if book_name:
+#         books = Book.objects.filter(title__contains = book_name)
+#     else:
+#         books = Book.objects.all()
+#     return books
 
-    return books
-
-def home(request):
-    book_name = request.GET.get('title')
-    
-    if book_name:
-        book = getBook(book_name) 
-    else:
-        book = getBook()
-
-    context = {'book':book}
-    return render(request,"book-filter.html",context)
+# def home(request):
+#     book_name = request.GET.get('title')    
+#     if book_name:
+#         book = getBook(book_name) 
+#     else:
+#         book = getBook()
+#     context = {'book':book}
+#     return render(request,"book-filter.html",context)
 
 
 # def getList(request):
@@ -44,8 +43,14 @@ def bookCreate(request):
         form = BookForm(request.POST,request.FILES)  
         if form.is_valid():  
             try:  
+                title = form.cleaned_data['title']
+                author = form.cleaned_data['author']
+                print("-------------")
+                print(title)
+
+
+                generate_pdf.delay(title,author)
                 form.save() 
-                
                 return redirect('book-list')  
             except:  
                 pass  

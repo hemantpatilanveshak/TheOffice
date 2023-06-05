@@ -1,4 +1,5 @@
 from celery import shared_task
+import time
 
 @shared_task
 def multiply_numbers(x,y):
@@ -12,6 +13,7 @@ def sqaure_number(x):
 
 @shared_task
 def add_numbers(x,y):
+    
     result = x + y
     print(result)
     return result

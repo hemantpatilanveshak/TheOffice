@@ -8,7 +8,7 @@ from django.http import HttpResponse
 def perform_calculation(request):
 
     # task_result = add_numbers(8,10)
-    task_result = add_numbers.delay(20,30)
+    task_result = add_numbers.delay(98,123)
     result = task_result.get()
 
     return HttpResponse(f"The final calcuation is {result}")
